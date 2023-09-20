@@ -36,17 +36,21 @@ const TimeLine = () => {
    ]);
 
    return (
-      <div className='d-flex'>
-         <div className='timeline_left col-9 justify-content-center'>
-            <div className='timeline_posts'>
-               {posts.map((post, index) => (
-                  <Post key={index} post={post} />
-               ))}
+      <div className='timeline row justify-content-center'>
+            <div className='col-lg-9'>
+               <div className='timeline_left'>
+                  <div className='timeline_posts d-flex flex-column align-items-center'>
+                     {posts.map((post, index) => (
+                        <Post key={index} post={post} />
+                     ))}
+                  </div>
+               </div>
             </div>
-         </div>
-         <div className='timeline_right col-3'>
-            <Suggestions />
-         </div>
+            <div className='col-lg-3 '>
+               <div className='timeline_right'>
+                  <Suggestions />
+               </div>
+            </div>
       </div>
    );
 };

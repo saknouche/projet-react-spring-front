@@ -22,6 +22,7 @@ const Post = ({post}) => {
             <img
                src={post.postImage}
                alt={`image-${post.user}`}
+               className='img-fluid w-100'
             />
          </div>
          <div className='post_footer'>
