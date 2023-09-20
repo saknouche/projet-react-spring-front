@@ -7,8 +7,10 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import TelegramIcon from '@mui/icons-material/Telegram';
 import SendIcon from '@mui/icons-material/Send';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { PostService } from '../../../services/Api.js';
 
 const Post = ({ post, setPosts, posts }) => {
+   const service = new PostService();
    const [liked, setLiked] = useState(true);
    const [dispalyChat, setDisplayChat] = useState(false);
    const [message, setMessage] = useState('');
@@ -27,37 +29,49 @@ const Post = ({ post, setPosts, posts }) => {
       setMessage(e.target.value);
    };
 
-   const handleChatSubmit = (e, id) => {
-      e.preventDefault();
+   const handleChatSubmit = (id) => {
+      // e.preventDefault();
+      //Js en dur
+      // if (message) {
+      //    const filtredPost = posts.filter((post) => post.id === id);
+      //    filtredPost[0].comments.push(message);
+      //    setPosts([...posts]);
+      // }
       if (message) {
          const filtredPost = posts.filter((post) => post.id === id);
          filtredPost[0].comments.push(message);
          setPosts([...posts]);
+         service
+            .addComment({ message: message, postId: id })
+            .then((res) => {
+               console.log(res.data);
+            })
+            .catch((e) => console.log(e.message));
       }
    };
 
    const handleDelete = (id) => {
-      const isTrue = confirm("Are you sûr?");
-      if(isTrue){
+      const isTrue = confirm('Are you sûr?');
+      if (isTrue) {
          const filtredPosts = posts.filter((post) => post.id !== id);
          setPosts([...filtredPosts]);
       }
-   }
+   };
 
    return (
       <div className='post'>
          <div className='post_header'>
             <div className='post_headerAuthor'>
-               <Avatar>{post.user.charAt(0).toUpperCase()}</Avatar>
-               {post.user}
-               <span>{post.timestamp}</span>
+               <Avatar>{post.username.charAt(0).toUpperCase()}</Avatar>
+               {post.username}
+               <span>{post.createdAt}</span>
             </div>
             <MoreHorizIcon />
          </div>
          <div className='post_image'>
             <img
-               src={post.postImage}
-               alt={`image-${post.user}`}
+               src={post.imageUrl}
+               alt={`image-${post.username}`}
                className='img-fluid w-100'
             />
          </div>
@@ -74,7 +88,6 @@ const Post = ({ post, setPosts, posts }) => {
                   />
                   {post.comments.length > 0 && (
                      <span
-                        onClick={() => displayComments(post.comments)}
                         className='me-1 bg-success rounded-2 p-1'
                      >
                         {post.comments.length}
@@ -83,7 +96,10 @@ const Post = ({ post, setPosts, posts }) => {
                   <TelegramIcon className='postIcon' />
                </div>
                <div className='post_iconsSave'>
-                  <DeleteIcon className='postIcon text-danger' onClick={() => handleDelete(post.id)} />
+                  <DeleteIcon
+                     className='postIcon text-danger'
+                     onClick={() => handleDelete(post.id)}
+                  />
                </div>
             </div>
             Liked by {post.likes} people
@@ -94,17 +110,17 @@ const Post = ({ post, setPosts, posts }) => {
                      onChange={(e) => handleChatChange(e)}
                      defaultValue='Comment this post ...'
                   ></textarea>
-                  <SendIcon onClick={(e) => handleChatSubmit(e, post.id)} />
+                  <SendIcon onClick={(e) => handleChatSubmit(post.id)} />
                </>
             )}
             {post.comments.length > 0 &&
                post.comments.length < 4 &&
-               post.comments.map((comment) => (
+               post.comments.map((comment, index) => (
                   <div
-                     key={comment}
+                     key={index}
                      className='bg-dark-subtle rounded p-2 mt-2 text-dark'
                   >
-                     {comment}
+                     {comment.message}
                   </div>
                ))}
          </div>

@@ -1,6 +1,6 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import HomePage from "./pages/homePage/HomePage.jsx";
-
+import {ToastContainer} from 'react-toastify';
 
 function App() {
 
@@ -11,6 +11,7 @@ function App() {
           <Route path='/' element={<HomePage/>} />
         </Routes>
       </BrowserRouter>
+      <ToastContainer toastStyle={{ backgroundColor: "#f0f9f3" }} />
     </div>
   )
 }

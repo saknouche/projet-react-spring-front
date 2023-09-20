@@ -2,13 +2,19 @@ import React, { useEffect, useState } from 'react';
 import './TimeLine.css';
 import Suggestions from './Suggestions.jsx';
 import Post from './posts/Post.jsx';
-import { data } from '../../data';
+// import { data } from '../../data';
+import { PostService } from '../../services/Api.js';
 
 const TimeLine = () => {
+   const service = new PostService();
    const [posts, setPosts] = useState([]);
+
    useEffect(() => {
-      setPosts(data);
-   }, []);
+      service
+         .getPosts()
+         .then((res) => setPosts(res.data))
+         .catch((e) => console.log(e));
+   }, [posts]);
 
    return (
       <div className='timeline row justify-content-center'>
@@ -16,7 +22,12 @@ const TimeLine = () => {
             <div className='timeline_left'>
                <div className='timeline_posts d-flex flex-column align-items-center'>
                   {posts.map((post) => (
-                     <Post key={post.id} post={post} setPosts={setPosts} posts={posts}/>
+                     <Post
+                        key={post.id}
+                        post={post}
+                        setPosts={setPosts}
+                        posts={posts}
+                     />
                   ))}
                </div>
             </div>
