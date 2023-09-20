@@ -1,12 +1,12 @@
 import Post from "./components/Post.jsx"
+import HomePage from "./pages/homePage/HomePage.jsx"
 
 function App() {
 
   return (
-    <>
-      <h1 className="text-center">Projet front</h1>
-      <Post/>
-    </>
+    <div className="text-white">
+      <HomePage/>
+    </div>
   )
 }
 

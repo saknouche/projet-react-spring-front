@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import axios from 'axios'
 
 const Post = () => {
     const [state, setState] = useState({
         selectedFile: ""
     })
+    console.log(state)
     const onFileChangeHandler = (e) => {
         e.preventDefault();
         setState({
@@ -12,15 +12,16 @@ const Post = () => {
         });
         const formData = new FormData();
         formData.append('file', state.selectedFile);
-        fetch('http://localhost:8080/upload', {
-            method: 'post',
-            body: formData
-        }).then(res => {
-            if(res.ok) {
-                console.log(res.data);
-                alert("File uploaded successfully.")
-            }
-        });
+        console.log(formData.get('file'))
+        // fetch('http://localhost:8080/upload', {
+        //     method: 'post',
+        //     body: formData
+        // }).then(res => {
+        //     if(res.ok) {
+        //         console.log(res.data);
+        //         alert("File uploaded successfully.")
+        //     }
+        // });
     };
 
 
