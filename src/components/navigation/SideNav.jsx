@@ -8,6 +8,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import MenuIcon from '@mui/icons-material/Menu';
 import './SideNav.css'
+import { Link } from 'react-router-dom';
 
 const SideNav = () => {
    return (
@@ -18,10 +19,10 @@ const SideNav = () => {
             alt='instagram logo'
          />
          <div className='d-flex flex-column'>
-            <button className='sideNav_button'>
+            <Link className='sideNav_button text-decoration-none' to={'/'}>
                <HomeIcon />
                <span>Home</span>
-            </button>
+            </Link>
             <button className='sideNav_button'>
                <SearchIcon />
                <span>Search</span>
@@ -42,10 +43,10 @@ const SideNav = () => {
                <FavoriteBorderIcon />
                <span>Notifications</span>
             </button>
-            <button className='sideNav_button'>
+            <Link className='sideNav_button text-decoration-none'>
                <AddCircleOutlineIcon />
                <span>Create</span>
-            </button>
+            </Link>
          </div>
          <div className='sideNav_more'>
             <button className="sideNav_button">

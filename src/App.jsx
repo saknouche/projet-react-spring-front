@@ -1,11 +1,16 @@
-import Post from "./components/Post.jsx"
-import HomePage from "./pages/homePage/HomePage.jsx"
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import HomePage from "./pages/homePage/HomePage.jsx";
+
 
 function App() {
 
   return (
     <div className="text-white">
-      <HomePage/>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<HomePage/>} />
+        </Routes>
+      </BrowserRouter>
     </div>
   )
 }
