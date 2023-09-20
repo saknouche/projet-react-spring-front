@@ -16,8 +16,6 @@
     flex-direction: row;
     align-items: center;
     font-weight: bold;
-    width: 130px;
-    justify-content: space-around;
 }
 
 .post_headerAuthor > span{
