@@ -7,14 +7,14 @@ import ChatIcon from '@mui/icons-material/Chat';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import MenuIcon from '@mui/icons-material/Menu';
-import './SideNav.css'
+import './SideNav.css';
 import { Link } from 'react-router-dom';
 
 const SideNav = () => {
    return (
       <div className='sideNav'>
          <img
-         className='sideNav_logo'
+            className='sideNav_logo'
             src='https://www.pngkey.com/png/full/828-8286178_mackeys-work-needs-no-elaborate-presentation-or-distracting.png'
             alt='instagram logo'
          />
@@ -49,7 +49,7 @@ const SideNav = () => {
             </Link>
          </div>
          <div className='sideNav_more'>
-            <button className="sideNav_button">
+            <button className='sideNav_button'>
                <MenuIcon />
                <span>More</span>
             </button>

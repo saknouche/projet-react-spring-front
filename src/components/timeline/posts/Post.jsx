@@ -14,14 +14,15 @@ const Post = ({ post, setPosts, posts }) => {
    const [liked, setLiked] = useState(true);
    const [dispalyChat, setDisplayChat] = useState(false);
    const [message, setMessage] = useState('');
-
-   const handleLikedClick = (id) => {
+   
+   
+   const handleLikedClick = (post) => {
       setLiked(!liked);
-      const filtredPost = posts.filter((post) => post.id === id);
+      // const filtredPost = posts.filter((post) => post.id === id);
       if (liked) {
-         filtredPost[0].likes++;
+         post.likes = post.likes + 1;
       } else {
-         filtredPost[0].likes--;
+         post.likes = post.likes - 1;
       }
    };
 
@@ -58,6 +59,8 @@ const Post = ({ post, setPosts, posts }) => {
    const handleCommentDelete = (id, postId) => {
       const isTrue = confirm('Are you sûr?');
       if (true) {
+         const filtredPosts = posts.filter((post) => post.id !== postId);
+         setPosts([...filtredPosts]);
          service
             .deleteComment(id)
             .then((res) => console.log(res.data))
@@ -87,7 +90,7 @@ const Post = ({ post, setPosts, posts }) => {
                <div className='post_iconsMain'>
                   <FavoriteBorderIcon
                      className={`postIcon ${!liked && 'text-danger'}`}
-                     onClick={() => handleLikedClick(post.id)}
+                     onClick={() => handleLikedClick(post)}
                   />
                   <ChatBubbleOutlineIcon
                      className='postIcon position-relative'

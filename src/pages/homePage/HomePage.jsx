@@ -2,7 +2,6 @@ import React from 'react';
 import SideNav from '../../components/navigation/SideNav.jsx';
 import TimeLine from '../../components/timeline/TimeLine.jsx';
 import './HomePage.css'
-import Post from '../../components/Post.jsx';
 
 
 const HomePage = () => {
@@ -13,7 +12,6 @@ const HomePage = () => {
             </div>
             <div className="homePage_timeline col-10">
                 <TimeLine/>
-                {/* <Post/> */}
             </div>
         </div>
     );

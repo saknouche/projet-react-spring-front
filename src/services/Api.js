@@ -9,6 +9,14 @@ export class PostService {
       }
    }
 
+   addPost(data) {
+      try {
+         return axios.post('http://localhost:8080/api/v1/posts', data);
+      } catch (error) {
+         console.error(error);
+      }
+   }
+
    addComment(data) {
       try {
          return axios.post('http://localhost:8080/api/v1/comment', data);
