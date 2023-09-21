@@ -10,10 +10,26 @@ export class PostService {
    }
 
    addComment(data) {
-    try {
-       return axios.post('http://localhost:8080/api/v1/comment', data);
-    } catch (error) {
-       console.error(error);
-    }
- }
+      try {
+         return axios.post('http://localhost:8080/api/v1/comment', data);
+      } catch (error) {
+         console.error(error);
+      }
+   }
+
+   deleteComment(id) {
+      try {
+         return axios.delete(`http://localhost:8080/api/v1/comments/${id}`);
+      } catch (error) {
+         console.error(error);
+      }
+   }
+
+   deletePost(id) {
+      try {
+         return axios.delete(`http://localhost:8080/api/v1/posts/${id}`);
+      } catch (error) {
+         console.error(error);
+      }
+   }
 }

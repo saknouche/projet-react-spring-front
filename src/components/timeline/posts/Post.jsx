@@ -30,13 +30,6 @@ const Post = ({ post, setPosts, posts }) => {
    };
 
    const handleChatSubmit = (id) => {
-      // e.preventDefault();
-      //Js en dur
-      // if (message) {
-      //    const filtredPost = posts.filter((post) => post.id === id);
-      //    filtredPost[0].comments.push(message);
-      //    setPosts([...posts]);
-      // }
       if (message) {
          const filtredPost = posts.filter((post) => post.id === id);
          filtredPost[0].comments.push(message);
@@ -55,6 +48,20 @@ const Post = ({ post, setPosts, posts }) => {
       if (isTrue) {
          const filtredPosts = posts.filter((post) => post.id !== id);
          setPosts([...filtredPosts]);
+         service
+            .deletePost(id)
+            .then((res) => console.log(res.data))
+            .catch((e) => console.log(e.message));
+      }
+   };
+
+   const handleCommentDelete = (id, postId) => {
+      const isTrue = confirm('Are you sûr?');
+      if (true) {
+         service
+            .deleteComment(id)
+            .then((res) => console.log(res.data))
+            .catch((e) => console.log(e));
       }
    };
 
@@ -87,9 +94,7 @@ const Post = ({ post, setPosts, posts }) => {
                      onClick={() => setDisplayChat(!dispalyChat)}
                   />
                   {post.comments.length > 0 && (
-                     <span
-                        className='me-1 bg-success rounded-2 p-1'
-                     >
+                     <span className='me-1 bg-success rounded-2 p-1'>
                         {post.comments.length}
                      </span>
                   )}
@@ -118,9 +123,17 @@ const Post = ({ post, setPosts, posts }) => {
                post.comments.map((comment, index) => (
                   <div
                      key={index}
-                     className='bg-dark-subtle rounded p-2 mt-2 text-dark'
+                     className='bg-dark-subtle rounded p-2 mt-2 text-dark d-flex justify-content-between'
                   >
-                     {comment.message}
+                     <div>{comment.message}</div>
+                     <span>
+                        <DeleteIcon
+                           className='text-danger'
+                           onClick={() =>
+                              handleCommentDelete(comment.id, post.id)
+                           }
+                        />
+                     </span>
                   </div>
                ))}
          </div>
